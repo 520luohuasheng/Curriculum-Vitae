@@ -125,8 +125,8 @@ var canvasjs = document.getElementById("js").getContext("2d");
 var canvasjq = document.getElementById("jq").getContext("2d");
 var canvasbs = document.getElementById("bs").getContext("2d");
 var canvasps = document.getElementById("ps").getContext("2d");
-var canvaspy = document.getElementById("py").getContext("2d");
-var canvaspc = document.getElementById("pc").getContext("2d");
+var canvasja = document.getElementById("py").getContext("2d");
+var canvaspy = document.getElementById("pc").getContext("2d");
 var canvasst = document.getElementById("st").getContext("2d");
 var canwidth = 160;
 var radius = 70;
@@ -267,13 +267,36 @@ var ps = function() {
 	}, 20);
 }
 
+var ja = function() {
+	var deg = 0;
+	var jaT = function(deg) {
+		var r = deg * Math.PI / 180;
+		canvasja.clearRect(0, 0, canwidth, canwidth);
+		canvasja.beginPath();
+		canvasja.strokeStyle = "#ffaaff";
+		canvasja.lineWidth = 10;
+		canvasja.arc(canwidth / 2, canwidth / 2, radius, 0 - 1 / 2 * Math.PI, r - 1 / 2 * Math.PI, false); //
+		canvasja.stroke();
+	};
+	var time = setInterval(function() {
+		var con = document.getElementsByTagName("section")[2];
+		if (con.style.display == "block") {
+			deg += 4;
+			jaT(deg);
+			if (deg > 216) {
+				clearInterval(time);
+			}
+		}
+	}, 20);
+}
+
 var py = function() {
 	var deg = 0;
 	var pyT = function(deg) {
 		var r = deg * Math.PI / 180;
 		canvaspy.clearRect(0, 0, canwidth, canwidth);
 		canvaspy.beginPath();
-		canvaspy.strokeStyle = "#ffaaff";
+		canvaspy.strokeStyle = "#00007f";
 		canvaspy.lineWidth = 10;
 		canvaspy.arc(canwidth / 2, canwidth / 2, radius, 0 - 1 / 2 * Math.PI, r - 1 / 2 * Math.PI, false); //
 		canvaspy.stroke();
@@ -283,29 +306,6 @@ var py = function() {
 		if (con.style.display == "block") {
 			deg += 4;
 			pyT(deg);
-			if (deg > 216) {
-				clearInterval(time);
-			}
-		}
-	}, 20);
-}
-
-var pc = function() {
-	var deg = 0;
-	var pcT = function(deg) {
-		var r = deg * Math.PI / 180;
-		canvaspc.clearRect(0, 0, canwidth, canwidth);
-		canvaspc.beginPath();
-		canvaspc.strokeStyle = "#00007f";
-		canvaspc.lineWidth = 10;
-		canvaspc.arc(canwidth / 2, canwidth / 2, radius, 0 - 1 / 2 * Math.PI, r - 1 / 2 * Math.PI, false); //
-		canvaspc.stroke();
-	};
-	var time = setInterval(function() {
-		var con = document.getElementsByTagName("section")[2];
-		if (con.style.display == "block") {
-			deg += 4;
-			pcT(deg);
 			if (deg > 144) {
 				clearInterval(time);
 			}
@@ -485,7 +485,7 @@ canjs();
 canjq();
 canbs();
 ps();
+ja();
 py();
-pc();
 st();
 waited_develop();
